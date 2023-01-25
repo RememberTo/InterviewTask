@@ -10,16 +10,30 @@ namespace InterviewTask
         {
             Console.WriteLine("Количество уровней елочки:");
 
-            var levels = int.Parse(Console.ReadLine() ?? string.Empty);
-            var line = new StringBuilder("*");
-            var countEmpty = levels - 1;
-
-            for (var i = 1; i <= levels; i++)
+            try
             {
-                var emptyStr = string.Concat(Enumerable.Repeat(" ", countEmpty--));
+                var levels = int.Parse(Console.ReadLine() ?? string.Empty);
 
-                Console.WriteLine(emptyStr + line);
-                line.Append("**");
+                if (levels < 1) throw new FormatException();
+
+                var line = new StringBuilder("*");
+                var countEmpty = levels - 1;
+
+                for (var i = 1; i <= levels; i++)
+                {
+                    var emptyStr = string.Concat(Enumerable.Repeat(" ", countEmpty--));
+
+                    Console.WriteLine(emptyStr + line);
+                    line.Append("**");
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Некорректное количество уровней");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
 
             Console.ReadLine();
